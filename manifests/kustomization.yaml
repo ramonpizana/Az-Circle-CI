@@ -8,4 +8,4 @@ namespace: nodejs
 images:
 - name: nodejs-aks-app
   newName: rp00831866/nodejs-aks-app
-  newTag: 3472c3e0b7c7dc1172d528b82aa02cf9091f67da
+  newTag: 3472c3e0b7c7dc1172d528b82aa02cf9091f67db
