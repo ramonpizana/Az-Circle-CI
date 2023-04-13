@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  azure-aks: circleci/azure-aks@0.3.0
 
 jobs:
   hello-job:
@@ -15,3 +17,19 @@ workflows:
   my-workflow:
     jobs:
       - hello-job
+  example-workflow:
+      jobs:
+        - azure-aks/create-cluster:
+            service-principal: env_var_name 
+            create-resource-group: false 
+            admin-username: ramonpizana 
+            cluster-name: mycluster-circleci 
+            resource-group: ramon-pizana 
+            subscription: c4774376-bc4c-48e6-93eb-c0ac26c6345d 
+            show-az-command: false 
+            generate-ssh-keys: false 
+            no-ssh-key: true 
+            no-wait: false 
+            skip-kubectl-install: false 
+            client-secret: env_var_password
+
