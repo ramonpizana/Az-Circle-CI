@@ -21,7 +21,13 @@ jobs:
       - checkout
       - run:
           name: Pull Updated code from repo
-          command: git pull origin $CIRCLE_BRANCH
+          command: 
+            git pull origin $CIRCLE_BRANCH
+            az login \
+              --service-principal \
+              --tenant $AZURE_SP_TENANT \
+              -u $AZURE_SP \
+              -p $AZURE_SP_PASSWORD
       - azure-aks/update-kubeconfig-with-credentials:
           cluster-name: << parameters.cluster-name >>
           install-kubectl: true
