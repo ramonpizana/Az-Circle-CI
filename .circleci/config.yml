@@ -69,7 +69,10 @@ workflows:
     jobs:
       - docker/publish:
           image: $DOCKER_LOGIN/$APP_NAME
-          tag: /^[a-z]+-?([a-z]+)?@[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+/,latest
+          tags:
+              only: /^[a-z]+-?([a-z]+)?@[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+/
+          branches:
+            ignore: /.*/
       - bump-docker-tag-kustomize:
           requires:
             - docker/publish
