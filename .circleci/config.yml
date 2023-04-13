@@ -13,7 +13,6 @@ jobs:
   #     - checkout # check out the code in the project directory
   #     - run: echo "hello world" # run the `echo` command
 
-
 workflows:
   # my-workflow:
   #   jobs:
@@ -24,7 +23,7 @@ workflows:
   example-workflow:
       jobs:
         - azure-aks/create-cluster:
-            service-principal: env_var_name 
+            service-principal: AZURE_SP 
             create-resource-group: false 
             admin-username: ramonpizana 
             cluster-name: mycluster-circleci 
@@ -35,6 +34,7 @@ workflows:
             no-ssh-key: true 
             no-wait: false 
             skip-kubectl-install: false 
-            client-secret: env_var_password
-            context: azvars
+            client-secret: AZURE_SP_PASSWORD
+            context: 
+              - azvars
 
