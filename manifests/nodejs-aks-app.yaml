@@ -5,21 +5,6 @@ metadata:
     name: nodejs
   name: nodejs
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: nodejs
-  name: nodejs
-  namespace: nodejs
-spec:
-  ports:
-  - port: 80
-    targetPort: 1337
-  selector:
-    app: nodejs
-  type: LoadBalancer
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,10 +23,25 @@ spec:
         app: nodejs
     spec:
       containers:
-      - image: rp00831866/nodejs-aks-app:3fd39ba649a70917cf519a07a8d89d5406cadd4a
+      - image: rp00831866/nodejs-aks-app:8cab9fc22471c87083ab7fda4ddd9e7bc3a6a356
         name: nodejs-aks-app
         ports:
         - containerPort: 1337
           name: http
       nodeSelector:
         beta.kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Ingress
+metadata:
+  labels:
+    app: nodejs
+  name: nodejs
+  namespace: nodejs
+spec:
+  ports:
+  - port: 80
+    targetPort: 1337
+  selector:
+    app: nodejs
+  type: Ingress
