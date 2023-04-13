@@ -6,32 +6,7 @@ orbs:
   kubernetes: circleci/kubernetes@1.3.0
 
 jobs:
-  aks-deploy:
-    executor: azure-aks/default
-    parameters:
-      cluster-name: 
-        description: |
-          myclustercircleci
-        type: string
-      resource-group:
-        description: |
-          ramon-pizana
-        type: string
-    steps:
-      - checkout
-      - run:
-          name: Pull Updated code from repo
-          command: git pull origin $CIRCLE_BRANCH
-      - azure-aks/update-kubeconfig-with-credentials:
-          cluster-name: << parameters.cluster-name >>
-          install-kubectl: true
-          perform-login: true
-          resource-group: << parameters.resource-group >>
-      - kubernetes/create-or-update-resource:
-          resource-file-path: manifests/$APP_NAME.yaml
-          resource-name: kustomization/$APP_NAME
-
-  bump-docker-tag-kustomize:
+  hello-job:
     docker:
       - image: cimg/base:stable
     steps:
